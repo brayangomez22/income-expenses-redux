@@ -3,14 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class DashboardComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
