@@ -7,5 +7,4 @@ export const dashboardRoutes: Routes = [
   { path: '', component: StatisticsComponent },
   { path: 'income-expenses', component: IncomeExpensesComponent },
   { path: 'detail', component: DetailComponent },
-  { path: '**', redirectTo: '' },
 ];
