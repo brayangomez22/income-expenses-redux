@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -40,11 +41,27 @@ export class LoginComponent {
       return;
     }
 
+    Swal.fire({
+      title: 'Please wait',
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
     const { email, password } = this.loginForm.value;
 
     this._authService
       .loginUser(email, password)
-      .then((credentials) => this.router.navigate(['/']))
-      .catch((err) => console.error(err));
+      .then((credentials) => {
+        Swal.close();
+        this.router.navigate(['/']);
+      })
+      .catch((err) =>
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.message,
+        })
+      );
   }
 }

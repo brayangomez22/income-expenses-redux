@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -44,11 +46,27 @@ export class RegisterComponent {
       return;
     }
 
+    Swal.fire({
+      title: 'Please wait',
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
     const { name, email, password } = this.registerForm.value;
 
     this._authService
       .createUser(name, email, password)
-      .then((credentials) => this.router.navigate(['/']))
-      .catch((err) => console.error(err));
+      .then((credentials) => {
+        Swal.close();
+        this.router.navigate(['/']);
+      })
+      .catch((err) =>
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.message,
+        })
+      );
   }
 }
