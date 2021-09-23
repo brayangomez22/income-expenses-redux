@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "income-and-expenses-app": {
+      "hosting": {
+        "authApp": [
+          "income-and-expenses-app"
+        ]
+      }
+    }
+  }
+}
