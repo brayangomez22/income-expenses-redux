@@ -1,24 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.reducer';
+import * as ui from '../../shared/ui.actions';
+
 import { AuthService } from '../../services/auth.service';
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styles: [],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
+  loading: boolean = false;
+  uiSubscription!: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private _authService: AuthService,
+    private store: Store<AppState>,
     private router: Router
   ) {
     this.createForm();
+  }
+
+  ngOnInit(): void {
+    this.uiSubscription = this.store
+      .select('ui')
+      .subscribe((ui) => (this.loading = ui.isLoading));
+  }
+
+  ngOnDestroy(): void {
+    this.uiSubscription.unsubscribe();
   }
 
   get nameNoValid() {
@@ -46,27 +65,31 @@ export class RegisterComponent {
       return;
     }
 
-    Swal.fire({
-      title: 'Please wait',
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    });
+    this.store.dispatch(ui.isLoading());
+
+    // Swal.fire({
+    //   title: 'Please wait',
+    //   didOpen: () => {
+    //     Swal.showLoading();
+    //   },
+    // });
 
     const { name, email, password } = this.registerForm.value;
 
     this._authService
       .createUser(name, email, password)
       .then((credentials) => {
-        Swal.close();
+        // Swal.close();
+        this.store.dispatch(ui.stopLoading());
         this.router.navigate(['/']);
       })
-      .catch((err) =>
+      .catch((err) => {
+        this.store.dispatch(ui.stopLoading());
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: err.message,
-        })
-      );
+        });
+      });
   }
 }
