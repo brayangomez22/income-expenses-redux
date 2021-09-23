@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private _authService: AuthService,
+    private router: Router
+  ) {
     this.createForm();
   }
 
@@ -33,5 +39,16 @@ export class RegisterComponent {
     });
   }
 
-  createUser() {}
+  createUser() {
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    const { name, email, password } = this.registerForm.value;
+
+    this._authService
+      .createUser(name, email, password)
+      .then((credentials) => this.router.navigate(['/']))
+      .catch((err) => console.error(err));
+  }
 }
