@@ -7,6 +7,13 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
   constructor(public auth: AngularFireAuth) {}
 
+  initAuthListener() {
+    this.auth.authState.subscribe((fuser) => {
+      console.log(fuser?.uid);
+      console.log(fuser?.email);
+    });
+  }
+
   createUser(name: string, email: string, password: string) {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
