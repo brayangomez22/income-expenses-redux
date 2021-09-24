@@ -15,6 +15,11 @@ import { Subscription } from 'rxjs';
 })
 export class AuthService {
   userSubscription!: Subscription;
+  private _user!: User;
+
+  get user() {
+    return this._user;
+  }
 
   constructor(
     public auth: AngularFireAuth,
@@ -34,10 +39,12 @@ export class AuthService {
               firestoreUser.uid,
               firestoreUser.name
             );
+            this._user = user;
             this.store.dispatch(authActions.setUser({ user }));
           });
       } else {
         if (this.userSubscription) {
+          this._user = new User('', '', '');
           this.userSubscription.unsubscribe();
         }
         this.store.dispatch(authActions.unSetUser());

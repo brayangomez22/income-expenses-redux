@@ -67,19 +67,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(ui.isLoading());
 
-    // Swal.fire({
-    //   title: 'Please wait',
-    //   didOpen: () => {
-    //     Swal.showLoading();
-    //   },
-    // });
-
     const { name, email, password } = this.registerForm.value;
 
     this._authService
       .createUser(name, email, password)
       .then((credentials) => {
-        // Swal.close();
         this.store.dispatch(ui.stopLoading());
         this.router.navigate(['/']);
       })
