@@ -5,13 +5,14 @@
         <h4 class="card-title">Agregar Ingreso / Egreso</h4>
         <p class="card-description">Especifique el monto y el tipo</p>
 
-        <form>
+        <form [formGroup]="incomeForm" (ngSubmit)="save()">
           <div class="form-group">
             <label>Descripción</label>
             <input
               type="text"
               class="form-control"
               placeholder="Descripción"
+              formControlName="description"
               name="descripcion"
             />
           </div>
@@ -22,6 +23,7 @@
               type="number"
               class="form-control"
               placeholder="Monto"
+              formControlName="monto"
               name="monto"
             />
             <p>Debe de ser un monto positivo</p>
@@ -30,14 +32,30 @@
           <div class="form-group">
             <label>Tipo</label>
             <br />
-            <button type="button" class="btn btn-primary btn-block">
+            <button
+              *ngIf="type === 'income'"
+              (click)="type = 'expense'"
+              type="button"
+              class="btn btn-primary btn-block"
+            >
               Ingreso
             </button>
-            <!-- <button type="button" class="btn btn-warning btn-block">Egreso</button> -->
+            <button
+              *ngIf="type === 'expense'"
+              (click)="type = 'income'"
+              type="button"
+              class="btn btn-warning btn-block"
+            >
+              Egreso
+            </button>
           </div>
 
           <hr />
-          <button type="button" class="btn btn-success mr-2">
+          <button
+            type="submit"
+            [disabled]="incomeForm.invalid"
+            class="btn btn-success mr-2"
+          >
             <i class="fa fa-save"></i>
             Agregar
           </button>
