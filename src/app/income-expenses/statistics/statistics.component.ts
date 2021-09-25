@@ -36,6 +36,11 @@ export class StatisticsComponent implements OnInit {
   }
 
   generateStatistics(items: IncomeExpenses[]) {
+    this.income = 0;
+    this.expenses = 0;
+    this.totalIncome = 0;
+    this.totalExpenses = 0;
+
     for (const item of items) {
       if (item.type === 'income') {
         this.totalIncome += item.monto;
