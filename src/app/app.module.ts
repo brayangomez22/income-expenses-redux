@@ -16,6 +16,9 @@ import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+// ng2-charts
+import { ChartsModule } from 'ng2-charts';
+
 // MyComponents
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,6 +61,7 @@ import { IncomeExpensePipe } from './pipes/income-expense.pipe';
       logOnly: environment.production,
       autoPause: true,
     }),
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

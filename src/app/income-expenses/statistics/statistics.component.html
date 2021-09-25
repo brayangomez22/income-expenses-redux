@@ -80,7 +80,15 @@
       <div class="card-body">
         <h1 class="card-title">Gráfica</h1>
 
-        <!-- grÃ¡fica ira aquÃ­ -->
+        <div style="display: block">
+          <canvas
+            baseChart
+            [data]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            chartType="doughnut"
+          >
+          </canvas>
+        </div>
       </div>
     </div>
   </div>
