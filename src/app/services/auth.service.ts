@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import * as authActions from '../auth/auth.actions';
+import * as incomeExpensesActions from '../income-expenses/income-expenses.actions';
 
 import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
@@ -48,6 +49,7 @@ export class AuthService {
           this.userSubscription.unsubscribe();
         }
         this.store.dispatch(authActions.unSetUser());
+        this.store.dispatch(incomeExpensesActions.unSetItems());
       }
     });
   }

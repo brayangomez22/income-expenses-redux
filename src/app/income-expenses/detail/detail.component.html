@@ -7,19 +7,34 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Descripción</th>
+              <th>Description</th>
               <th>Monto</th>
-              <th>Tipo</th>
-              <th></th>
+              <th>Type</th>
+              <th>Actions</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td>Descripción</td>
-              <td>Monto</td>
-              <td>Tipo</td>
-              <td>acciones</td>
+            <tr *ngFor="let item of incomeExpenses">
+              <td>{{ item.description }}</td>
+              <td>{{ item.monto | currency }}</td>
+              <td
+                [class.text-success]="item.type === 'income'"
+                [class.text-danger]="item.type === 'expense'"
+              >
+                {{ item.type }}
+              </td>
+              <td>
+                <button
+                  *ngIf="item.uid != null"
+                  (click)="delete(item.uid)"
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  <i class="fa fa-trash"></i>
+                  Delete
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

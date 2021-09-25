@@ -55,7 +55,7 @@ export class IncomeExpensesComponent implements OnInit, OnDestroy {
     this.store.dispatch(ui.isLoading());
 
     const { description, monto } = this.incomeForm.value;
-    const incomeExpense = new IncomeExpenses(description, monto, this.type);
+    const incomeExpense = new IncomeExpenses(description, monto, this.type, '');
 
     this._incomeExpenseService
       .createdIncomeExpense(incomeExpense)
