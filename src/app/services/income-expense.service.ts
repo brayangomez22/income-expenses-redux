@@ -21,4 +21,11 @@ export class IncomeExpenseService {
       .collection('items')
       .add({ ...incomeExpense });
   }
+
+  initIncomeExpensesListener(uid: string) {
+    this.firestore
+      .collection(`${uid}/income-expense/items`)
+      .valueChanges()
+      .subscribe((pepe) => console.log(pepe));
+  }
 }
