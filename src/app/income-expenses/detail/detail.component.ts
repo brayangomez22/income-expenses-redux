@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import Swal from 'sweetalert2';
+
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.reducer';
 
 import { IncomeExpenses } from '../../models/income-expenses.model';
+import { IncomeExpenseService } from '../../services/income-expense.service';
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +18,10 @@ export class DetailComponent implements OnInit, OnDestroy {
   incomeExpenses: IncomeExpenses[] = [];
   incomeExpensesSubs!: Subscription;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private _incomeExpensesService: IncomeExpenseService
+  ) {}
 
   ngOnInit(): void {
     this.incomeExpensesSubs = this.store
@@ -28,6 +34,11 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   delete(uid: string) {
-    console.log(uid);
+    this._incomeExpensesService
+      .deleteIncomeExpense(uid)
+      .then(() =>
+        Swal.fire('Item deleted successfully', 'Item was removed', 'success')
+      )
+      .catch((err) => Swal.fire('Error', err.message, 'error'));
   }
 }

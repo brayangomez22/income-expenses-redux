@@ -36,4 +36,11 @@ export class IncomeExpenseService {
         )
       );
   }
+
+  deleteIncomeExpense(uidItem: string) {
+    const uid = this._authService.user.uid;
+    return this.firestore
+      .doc(`${uid}/income-expense/items/${uidItem}`)
+      .delete();
+  }
 }
