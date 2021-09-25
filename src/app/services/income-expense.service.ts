@@ -24,7 +24,7 @@ export class IncomeExpenseService {
   }
 
   initIncomeExpensesListener(uid: string) {
-    this.firestore
+    return this.firestore
       .collection(`${uid}/income-expense/items`)
       .snapshotChanges()
       .pipe(
@@ -34,7 +34,6 @@ export class IncomeExpenseService {
             ...(doc.payload.doc.data() as any),
           }))
         )
-      )
-      .subscribe((pepe) => console.log(pepe));
+      );
   }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
+import * as incomeExpensesActions from '../income-expenses/income-expenses.actions';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -13,6 +16,7 @@ import { IncomeExpenseService } from '../services/income-expense.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   userSubs!: Subscription;
+  incomeExpenseSubs!: Subscription;
 
   constructor(
     private store: Store<AppState>,
@@ -24,11 +28,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .select('user')
       .pipe(filter((auth) => auth.user != null))
       .subscribe(({ user }) => {
-        this._incomeExpenseService.initIncomeExpensesListener(user?.uid);
+        this.incomeExpenseSubs = this._incomeExpenseService
+          .initIncomeExpensesListener(user?.uid)
+          .subscribe((incomeExpenses) =>
+            this.store.dispatch(
+              incomeExpensesActions.setItems({ items: incomeExpenses })
+            )
+          );
       });
   }
 
   ngOnDestroy(): void {
-    this.userSubs.unsubscribe();
+    if (this.incomeExpenseSubs) {
+      this.incomeExpenseSubs.unsubscribe();
+    }
+    if (this.userSubs) {
+      this.userSubs.unsubscribe();
+    }
   }
 }
