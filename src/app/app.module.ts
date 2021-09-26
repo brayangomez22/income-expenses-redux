@@ -16,7 +16,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 // My Modules
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
-import { IncomeExpensesModule } from './income-expenses/income-expenses.module';
 
 import { AppComponent } from './app.component';
 
@@ -25,7 +24,6 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AuthModule,
-    IncomeExpensesModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),

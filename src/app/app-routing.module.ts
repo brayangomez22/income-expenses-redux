@@ -6,6 +6,13 @@ import { RegisterComponent } from './auth/register/register.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./income-expenses/income-expenses.module').then(
+        (m) => m.IncomeExpensesModule
+      ),
+  },
   { path: '**', redirectTo: '' },
 ];
 
