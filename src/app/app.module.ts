@@ -3,49 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 // AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
-
-// RxForms
-import { ReactiveFormsModule } from '@angular/forms';
 
 // NGRX
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-// ng2-charts
-import { ChartsModule } from 'ng2-charts';
-
 // My Modules
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
+import { IncomeExpensesModule } from './income-expenses/income-expenses.module';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
-import { StatisticsComponent } from './income-expenses/statistics/statistics.component';
-import { DetailComponent } from './income-expenses/detail/detail.component';
-import { IncomeExpensePipe } from './pipes/income-expense.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    IncomeExpensesComponent,
-    StatisticsComponent,
-    DetailComponent,
-    IncomeExpensePipe,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AuthModule,
-    SharedModule,
+    IncomeExpensesModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
@@ -56,7 +37,6 @@ import { IncomeExpensePipe } from './pipes/income-expense.pipe';
       logOnly: environment.production,
       autoPause: true,
     }),
-    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
