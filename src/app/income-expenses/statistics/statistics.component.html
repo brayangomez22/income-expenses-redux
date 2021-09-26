@@ -7,7 +7,7 @@
             <i class="fa fa-money-bill-alt text-success icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Ingresos</p>
+            <p class="mb-0 text-right">Income</p>
             <div class="fluid-container">
               <h3 class="font-weight-medium text-right mb-0">
                 {{ totalIncome | currency }}
@@ -31,7 +31,7 @@
             <i class="fa fa-shipping-fast text-danger icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Egresos</p>
+            <p class="mb-0 text-right">Expenses</p>
             <div class="fluid-container">
               <h3 class="font-weight-medium text-right mb-0">
                 {{ totalExpenses | currency }}
@@ -57,7 +57,7 @@
             <i class="fa fa-building text-info icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Diferencia</p>
+            <p class="mb-0 text-right">Difference</p>
             <div class="fluid-container">
               <h3
                 [ngClass]="{
@@ -78,7 +78,7 @@
   <div class="col-12 p-5" *ngIf="income > 0 || expenses > 0">
     <div class="card card-statistics">
       <div class="card-body">
-        <h1 class="card-title">Gráfica</h1>
+        <h1 class="card-title">Graph</h1>
 
         <div style="display: block">
           <canvas

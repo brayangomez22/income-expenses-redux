@@ -4,7 +4,7 @@
   >
     <div class="row w-100">
       <div class="col-lg-4 mx-auto">
-        <h2 class="text-center mb-4" style="color: white">Ingresar</h2>
+        <h2 class="text-center mb-4" style="color: white">Login</h2>
         <div class="auto-form-wrapper">
           <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
             <div class="form-group">
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label">Contraseña</label>
+              <label class="label">Password</label>
               <div class="input-group">
                 <input
                   type="password"
@@ -64,11 +64,11 @@
 
             <div class="text-block text-center my-3">
               <span class="text-small font-weight-semibold"
-                >No estas registrado?
+                >You are not registered?
               </span>
               <br />
               <a routerLink="/register" class="text-black text-small"
-                >Crear una cuenta</a
+                >Create an account</a
               >
             </div>
           </form>
