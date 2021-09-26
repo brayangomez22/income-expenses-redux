@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { ChartsModule } from 'ng2-charts';
+
+import { StoreModule } from '@ngrx/store';
+import { incomeExpenseReducer } from './income-expenses.reducer';
 
 import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
 
@@ -25,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    StoreModule.forFeature('incomeExpenses', incomeExpenseReducer),
     ReactiveFormsModule,
     ChartsModule,
     SharedModule,

@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
+import { AppStateWithIncome } from '../income-expenses.reducer';
 
 import { IncomeExpenses } from '../../models/income-expenses.model';
 import { IncomeExpenseService } from '../../services/income-expense.service';
@@ -19,7 +19,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   incomeExpensesSubs!: Subscription;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<AppStateWithIncome>,
     private _incomeExpensesService: IncomeExpenseService
   ) {}
 

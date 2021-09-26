@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { MultiDataSet, Label } from 'ng2-charts';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
+import { AppStateWithIncome } from '../income-expenses.reducer';
 
 import { IncomeExpenses } from '../../models/income-expenses.model';
 
@@ -27,7 +27,7 @@ export class StatisticsComponent implements OnInit {
   public doughnutChartLabels: Label[] = ['Income', 'Expenses'];
   public doughnutChartData: MultiDataSet = [[]];
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppStateWithIncome>) {}
 
   ngOnInit(): void {
     this.store
