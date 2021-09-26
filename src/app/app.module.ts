@@ -19,11 +19,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
-// MyComponents
+// My Modules
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
 import { StatisticsComponent } from './income-expenses/statistics/statistics.component';
@@ -36,8 +36,6 @@ import { IncomeExpensePipe } from './pipes/income-expense.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     DashboardComponent,
     IncomeExpensesComponent,
     StatisticsComponent,
@@ -49,6 +47,7 @@ import { IncomeExpensePipe } from './pipes/income-expense.pipe';
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
