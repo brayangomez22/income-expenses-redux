@@ -22,15 +22,13 @@ import { ChartsModule } from 'ng2-charts';
 // My Modules
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
 import { StatisticsComponent } from './income-expenses/statistics/statistics.component';
 import { DetailComponent } from './income-expenses/detail/detail.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { IncomeExpensePipe } from './pipes/income-expense.pipe';
 
 @NgModule({
@@ -40,14 +38,12 @@ import { IncomeExpensePipe } from './pipes/income-expense.pipe';
     IncomeExpensesComponent,
     StatisticsComponent,
     DetailComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
     IncomeExpensePipe,
   ],
   imports: [
     BrowserModule,
     AuthModule,
+    SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
